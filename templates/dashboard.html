@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Dashboard</h2>
+<div class="mb-3">
+  <a href="{{ url_for('main.log_exercise') }}" class="btn btn-primary">Log Exercise</a>
+  <a href="{{ url_for('main.log_calories') }}" class="btn btn-warning">Log Calories</a>
+  <a href="{{ url_for('main.log_water') }}" class="btn btn-info">Log Water</a>
+</div>
+<h4>Recent Logs</h4>
+<ul>
+  {% for e in exercises %}<li>{{ e.name }} on {{ e.timestamp.date() }}</li>{% endfor %}
+</ul>
+{% endblock %}

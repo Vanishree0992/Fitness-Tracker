@@ -1,0 +1,58 @@
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  // Get data from Flask passed via Jinja
+ const calorieLabels = "calorie_labels | tojson | safe ";
+    const calorieValues = "calorie_values | tojson | safe";
+    const weightLabels = " weight_labels | tojson | safe ";
+    const weightValues = " weight_values | tojson | safe ";
+
+  // Calories chart
+  const calCtx = document.getElementById('calChart').getContext('2d');
+  new Chart(calCtx, {
+    type: 'line',
+    data: {
+      labels: calorieLabels,
+      datasets: [{
+        label: 'Calories Consumed',
+        data: calorieValues,
+        borderColor: 'orange',
+        backgroundColor: 'rgba(255,165,0,0.2)',
+        fill: true
+      }]
+    },
+    options: {
+      responsive: true,
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+
+  // Weight chart
+  const weightCtx = document.getElementById('weightChart').getContext('2d');
+  new Chart(weightCtx, {
+    type: 'line',
+    data: {
+      labels: weightLabels,
+      datasets: [{
+        label: 'Weight Over Time',
+        data: weightValues,
+        borderColor: 'green',
+        backgroundColor: 'rgba(0,255,0,0.2)',
+        fill: true
+      }]
+    },
+    options: {
+      responsive: true,
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+});
+</script>
